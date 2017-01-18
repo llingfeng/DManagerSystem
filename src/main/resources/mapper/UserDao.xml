@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omg.dao.UserDao">
+    <select id="queryByUserName" resultType="User">
+        SELECT user_name,user_password FROM user WHERE user_name = #{userName}
+    </select>
+
+    <update id="modifyUser">
+        UPDATE user set user_password = #{userPassword} WHERE user_name = #{userName}
+    </update>
+
+    <select id="queryByUserNameAndPassword" resultType="User">
+        SELECT user_name,user_password FROM user WHERE user_name = #{userName} AND user_password = #{userPassword}
+    </select>
+</mapper>

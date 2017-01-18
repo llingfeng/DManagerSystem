@@ -1,0 +1,87 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omg.dao.EmployeeDao">
+
+    <insert id="addEmployee">
+        INSERT INTO employee(employee_name, employee_sexy,department_id) VALUES (#{employeeName},#{employeeSexy},#{departmentId});
+    </insert>
+
+    <delete id="deleteEmployeeById">
+        DELETE FROM employee WHERE employee_id = #{employeeId}
+    </delete>
+
+    <delete id="batchDeleteEmployee">
+        DELETE FROM employee WHERE employee_id in(
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+    <update id="updateEmployee" parameterType="Employee">
+        UPDATE
+          employee
+        SET
+          employee_name = #{employeeName},
+          employee_sexy = #{employeeSexy},
+          department_id = #{departmentId}
+        WHERE
+          employee_id = #{employeeId}
+    </update>
+
+    <select id="queryEmployeeById" resultType="Employee">
+        SELECT
+          emp.employee_id,emp.employee_name,emp.employee_sexy,emp.department_id,emp.create_time,emp.update_time,
+          dep.department_id "department.department_id",
+          dep.department_name "department.department_name",
+          dep.parent_id "department.department_id",
+          dep.create_time "department.create_time",
+          dep.update_time "department.update_time"
+        from
+          employee emp
+        LEFT JOIN
+          department dep
+        ON
+          emp.department_id = dep.department_id
+        WHERE
+          emp.employee_id = #{employeeId}
+    </select>
+
+    <select id="queryEmployeeList" resultType="Employee">
+        SELECT
+          emp.employee_id,emp.employee_name,emp.employee_sexy,emp.department_id,emp.create_time,emp.update_time,
+          dep.department_id "department.department_id",
+          dep.department_name "department.department_name",
+          dep.parent_id "department.department_id",
+          dep.create_time "department.create_time",
+          dep.update_time "department.update_time"
+        from
+          employee emp
+        LEFT JOIN
+          department dep
+        ON
+          emp.department_id = dep.department_id
+    </select>
+
+    <select id="queryEmployeeListByParam" parameterType="Employee" resultType="Employee">
+        SELECT
+          emp.employee_id,emp.employee_name,emp.employee_sexy,emp.department_id,emp.create_time,emp.update_time,
+          dep.department_id "department.department_id",
+          dep.department_name "department.department_name",
+          dep.parent_id "department.department_id",
+          dep.create_time "department.create_time",
+          dep.update_time "department.update_time"
+        from
+          employee emp
+        LEFT JOIN
+          department dep
+        ON
+          emp.department_id = dep.department_id
+        WHERE 1=1
+          <if test="employeeName != null and !&quot;&quot;.equals(employeeName.trim())">
+              and employee_name LIKE '%' #{employeeName} '%'
+          </if>
+    </select>
+
+</mapper>

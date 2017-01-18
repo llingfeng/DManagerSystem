@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - department_manage@localhost" uuid="12366325-8350-4c27-9351-8ea6d66abea5">
+    <database-info product="MySQL" version="5.7.11" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+      <schema id="1" name="department_manage">
+        <visible>1</visible>
+      </schema>
+      <schema id="2" name="demo"/>
+      <schema id="3" name="goods"/>
+      <schema id="4" name="imooc"/>
+      <schema id="5" name="information_schema"/>
+      <schema id="6" name="micro_message"/>
+      <schema id="7" name="mysql"/>
+      <schema id="8" name="performance_schema"/>
+      <schema id="9" name="seckill"/>
+      <schema id="10" name="sys"/>
+      <schema id="11" name="test"/>
+      <table id="12" parent="1" name="department">
+        <comment>部门表</comment>
+      </table>
+      <table id="13" parent="1" name="employee">
+        <comment>员工表</comment>
+      </table>
+      <table id="14" parent="1" name="user">
+        <comment>用户表</comment>
+      </table>
+      <column id="15" parent="12" name="department_id">
+        <comment>部门id</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="16" parent="12" name="department_name">
+        <comment>部门名称</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(90)|0</data-type>
+      </column>
+      <column id="17" parent="12" name="parent_id">
+        <comment>上级部门id</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="18" parent="12" name="create_time">
+        <comment>创建时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>datetime|0</data-type>
+        <default-expression>CURRENT_TIMESTAMP</default-expression>
+      </column>
+      <column id="19" parent="12" name="update_time">
+        <comment>更新时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>timestamp|0</data-type>
+        <default-expression>CURRENT_TIMESTAMP</default-expression>
+      </column>
+      <key id="20" parent="12" name="PRIMARY">
+        <columns>department_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="21" parent="13" name="employee_id">
+        <comment>员工id</comment>
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="22" parent="13" name="employee_name">
+        <comment>员工姓名</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(60)|0</data-type>
+      </column>
+      <column id="23" parent="13" name="employee_sexy">
+        <comment>员工性别 0-女 1-男</comment>
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)|0</data-type>
+      </column>
+      <column id="24" parent="13" name="create_time">
+        <comment>创建时间</comment>
+        <data-type>datetime|0</data-type>
+        <default-expression>CURRENT_TIMESTAMP</default-expression>
+      </column>
+      <column id="25" parent="13" name="update_time">
+        <comment>更新时间</comment>
+        <mandatory>1</mandatory>
+        <data-type>timestamp|0</data-type>
+        <default-expression>CURRENT_TIMESTAMP</default-expression>
+      </column>
+      <column id="26" parent="13" name="department_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <key id="27" parent="13" name="PRIMARY">
+        <columns>employee_id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="28" parent="14" name="user_name">
+        <comment>用户名</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)|0</data-type>
+      </column>
+      <column id="29" parent="14" name="user_password">
+        <comment>用户密码</comment>
+        <mandatory>1</mandatory>
+        <data-type>varchar(30)|0</data-type>
+      </column>
+      <key id="30" parent="14" name="PRIMARY">
+        <columns>user_name</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>

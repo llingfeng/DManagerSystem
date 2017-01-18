@@ -1,0 +1,78 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.omg.dao.DepartmentDao">
+
+    <select id="queryDepartmentList" resultType="Department">
+        SELECT d1.department_id,d1.department_name,d1.parent_id,d1.create_time,d1.update_time,
+          d2.department_id "upDepartment.department_id",
+          d2.department_name "upDepartment.department_name",
+          d2.parent_id "upDepartment.parent_id",
+          d2.create_time "upDepartment.create_time",
+          d2.update_time "upDepartment.update_time"
+        from department d1
+        LEFT JOIN department d2
+          on d1.parent_id = d2.department_id
+        ORDER BY
+            department_id ASC ;
+    </select>
+
+    <select id="queryDepartmentListByParam" parameterType="Department" resultType="Department">
+        SELECT d1.department_id,d1.department_name,d1.parent_id,d1.create_time,d1.update_time,
+        d2.department_id "upDepartment.department_id",
+        d2.department_name "upDepartment.department_name",
+        d2.parent_id "upDepartment.parent_id",
+        d2.create_time "upDepartment.create_time",
+        d2.update_time "upDepartment.update_time"
+        from department d1
+        LEFT JOIN department d2
+        on d1.parent_id = d2.department_id
+        WHERE 1=1
+        <if test="departmentName != null and !&quot;&quot;.equals(departmentName.trim())">
+            AND d1.department_name LIKE '%' #{departmentName} '%'
+        </if>
+        ORDER BY
+        department_id ASC ;
+    </select>
+
+    <delete id="deleteDepartmentById">
+        DELETE FROM department WHERE department_id = #{departmentId}
+    </delete>
+
+    <delete id="batchDeleteDepartment">
+        DELETE FROM department WHERE department_id in(
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+    <insert id="addDepartment">
+        INSERT INTO department(department_name, parent_id) VALUES (#{departmentName},#{parentId});
+    </insert>
+
+    <update id="updateDepartment">
+        UPDATE
+          department
+        SET
+          department_name=#{departmentName},
+          parent_id = #{parentId}
+        WHERE
+          department_id = #{departmentId}
+    </update>
+
+    <select id="queryDepartmentById" resultType="Department">
+        SELECT d1.department_id,d1.department_name,d1.parent_id,d1.create_time,d1.update_time,
+          d2.department_id "upDepartment.department_id",
+          d2.department_name "upDepartment.department_name",
+          d2.parent_id "upDepartment.parent_id",
+          d2.create_time "upDepartment.create_time",
+          d2.update_time "upDepartment.update_time"
+        from department d1
+        LEFT JOIN department d2
+          on d1.parent_id = d2.department_id
+        WHERE
+          d1.department_id = #{departmentId}
+    </select>
+
+</mapper>
